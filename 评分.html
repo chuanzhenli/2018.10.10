@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			ul{height:50px}
+			li{list-style: none;
+				float: left;
+				background: url(img/star.gif) no-repeat 0 0 ;
+				height:28px;
+				width:27px;
+				}
+			#box{margin-left:50px;}
+		</style>
+	</head>
+	<body>
+		<script>
+			window.onload=function(){
+				let arr = ["差","一般","好","很好","非常好"];
+				let oBox=document.getElementById('box')
+				let oLi=document.getElementsByTagName('li');
+				let bol=false;
+				let index=0;
+				for(let m=0;m<oLi.length;m++){
+					//划过时分两种情况，光划不点，和滑到指定位置点击
+					//1，设置了布尔值初始为假。当点击时才为真
+					oLi[m].onmouseenter=function(){
+						//1，当点击时，由下方点击事件改变布尔值传过来参数在执行
+						if(bol){
+							if(m>=index){
+							for(n=0;n<oLi.length;n++){
+								oLi[n].style.background = "url(img/star.gif) no-repeat 0 0";
+							}
+							for(k=0;k<=m;k++){
+							oLi[k].style.background = "url(img/star.gif) no-repeat 0 -28px";
+						}
+						}
+						}
+						//当未点击时，首先遍历所有li,让其背景为初始值灰色，划过时妈的值发生改变，但此时下方i不会变，所有仍为灰色，再循环一次，设置j值，让其<=m,划过时为黄色
+						else{
+						for(let i=0;i<oLi.length;i++){
+						oLi[i].style.background = "url(img/star.gif) no-repeat 0 0";
+					}
+				
+						for(let j=0;j<=m;j++){
+					
+						oLi[j].style.background = "url(img/star.gif) no-repeat 0 -28px";
+						//双击事件加在哪都无所谓，因为想点击必须要划过啊，所以，else至少执行一次
+						oLi[0].ondblclick=function(){
+							oLi[0].style.background = "url(img/star.gif) no-repeat 0 0";
+							oBox.innerHTML='0分绝对差评'
+						}
+					}
+				}
+				}
+					//点击时
+					oLi[m].onclick=function(){
+						bol=true;
+						index=m;
+						oBox.innerHTML=arr[m];
+						//点击事件，必须要加，当五个全选，你再点击第三个时，如果不循环，5个会全为黄色，m=4 向上传，全黄没问题;
+						//当再次滑到第三个吧，点击帝3个时 m=2；但是下方没有代码，
+							for(n=0;n<oLi.length;n++){
+								oLi[n].style.background = "url(img/star.gif) no-repeat 0 0";
+							}
+							for(k=0;k<=m;k++){
+							oLi[k].style.background = "url(img/star.gif) no-repeat 0 -28px";
+						}
+					}
+				
+				}
+			}
+		</script>
+		
+		<ul>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+		
+		<div id="box"></div>
+	</body>
+</html>

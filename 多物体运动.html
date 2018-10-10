@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+				div{
+				width: 100px;
+				height: 100px;
+				background: red;
+				margin-top: 10px;
+				opacity: 1;
+				filter: alpha(opacity=100);
+				font-size: 16px;
+				border: 2px solid black;
+			}
+		</style>
+	</head>
+	<body>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		
+		<script src="js/sport_11.js"></script>
+		<script>
+			const oDiv=document.querySelectorAll('div');
+			for(let i=0;i<oDiv.length;i++){
+			oDiv[i].onmouseenter=function(){
+				sport_11(this,{width:400})
+			}
+			oDiv[i].onmouseleave=function(){
+				sport_11(this,{width:100})
+			}
+			}
+//			oDiv[1].onmouseenter=function(){
+//				sport_11(this,{width:400})
+//			}
+//			oDiv[1].onmouseleave=function(){
+//				sport_11(this,{width:100})
+//			}
+//			oDiv[2].onmouseenter=function(){
+//				sport_11(this,{width:400})
+//			}
+//			oDiv[2].onmouseleave=function(){
+//				sport_11(this,{width:100})
+//			}
+//			oDiv[3].onmouseenter=function(){
+//				sport_11(this,{width:400})
+//			}
+//			oDiv[3].onmouseleave=function(){
+//				sport_11(this,{width:100})
+//			}
+//			oDiv[4].onmouseenter=function(){
+//				sport_11(this,{width:400})
+//			}
+//			oDiv[4].onmouseleave=function(){
+//				sport_11(this,{width:100})
+//			}
+		</script>
+	</body>
+</html>

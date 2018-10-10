@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			body{margin:0;padding: 0;}
+			#btn1{position: absolute;z-index: 100;}
+			#left{height:50px;width:200px;background: red;position:absolute;left:-200px ;z-index: 50;}
+			#top{background: orange;height:400px;width:200px;position: absolute;top:-350px;display: none;}
+			#btn2{position: absolute;right:0;bottom:0}
+		</style>
+	</head>
+	<body>
+		<input type="button" value="开启" id="btn1" />
+		<div id="left"></div>
+		<div id="top">
+			<input type="button" value="关闭" id="btn2" />
+		</div>
+		<script src="js/sport_11.js"></script>
+		<script>
+			let oBtn1=document.getElementById('btn1');
+			let oLeft=document.getElementById('left');
+			let oTop=document.getElementById('top');
+			let oBtn2=document.getElementById('btn2');
+			oBtn1.onclick=function(){
+				sport_11(oLeft,{left:0},function(){
+					oTop.style.display='block'
+					sport_11(oTop,{top:50})
+				})
+			}
+			oBtn2.onclick=function(){
+				sport_11(oTop,{top:-350},function(){
+					sport_11(oLeft,{left:-200})
+					oTop.style.display='none'
+				})
+			}
+		</script>
+	</body>
+</html>

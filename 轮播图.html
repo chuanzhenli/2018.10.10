@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{padding: 0;margin: 0;}
+			li{list-style: none;}
+			body{background: #CcC;}
+			#box{height:395px;width:400px;margin:100px auto;overflow: hidden;background: #ccc;}
+			#top{height:300px;position: relative;margin-bottom: 10px;}
+			#top li{height:300px;width:400px;position: absolute;}
+			#top img{height:300px;width:400px;position: absolute;}
+			#left{height: 300px;width:200px;position: absolute;left: 0;z-index: 99;}
+			#right{height: 300px;width:200px;position: absolute;right: 0;z-index: 99;}
+			#btn1{height: 60px;width: 60px;
+				background: url(img/btn.gif) no-repeat;
+				 position: absolute;top:120px;left:10px;
+				 z-index: 100;
+				 opacity: 0;
+				filter: alpha(opacity=0);}
+			#btn2{height: 60px;width: 60px;
+				background: url(img/btn.gif) no-repeat 0 -60px;				
+				 position: absolute;top:120px;right:10px;
+				 z-index: 100;
+				 opacity: 0;
+				filter: alpha(opacity=0);}
+			#bottom{width:400px;position: relative}
+			#bottom ul{position: absolute;width:1000px;}
+			#bottom ul li{float:left;}
+			#bottom img{height:75px;width:100px;}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<div id="top">
+				<div id="left"></div>
+				<div id="right"></div>
+				<a href="javascript:;" id="btn1"></a>
+				<a href="javascript:;" id="btn2"></a>
+				<ul>
+					
+					<li><img src="img/2.jpg" style="z-index:1"></li>
+					<li><img src="img/1.jpg"></li>
+					<li><img src="img/3.jpg"></li>
+					<li><img src="img/4.jpg"></li>
+					<li><img src="img/5.jpg"></li>
+					<li><img src="img/6.jpg"></li>
+					<li><img src="img/7.jpg"></li>
+					<li><img src="img/8.jpg"></li>
+					<li><img src="img/9.jpg"></li>
+					<li><img src="img/10.jpg"></li>
+				
+				</ul>
+			</div>
+			<div id="bottom">
+				<ul id="ul">
+					
+					<li><img src="img/2.jpg"></li>
+					<li><img src="img/1.jpg"></li>
+					<li><img src="img/3.jpg"></li>
+					<li><img src="img/4.jpg"></li>
+					<li><img src="img/5.jpg"></li>
+					<li><img src="img/6.jpg"></li>
+					<li><img src="img/7.jpg"></li>
+					<li><img src="img/8.jpg"></li>
+					<li><img src="img/9.jpg"></li>					
+					<li><img src="img/10.jpg"></li>
+				</ul>
+			</div>
+		</div>
+		<script type="text/javascript" src="js/sport_11.js"></script>
+		<script>
+			//获取最大的盒子
+			const oBox=document.getElementById('box');
+			//获取top顶部大盒子
+			const oTop=document.getElementById('top');
+			//获取大图li
+			const oBigpic=oTop.getElementsByTagName('li');
+			//获取大图片
+//			const oBigpic=document.getElementsByTagName('img')
+			//左遮罩
+			const oLeft=document.getElementById('left');
+			//右遮罩
+			const oRight=document.getElementById('right')
+			//左按钮,右按钮
+			const oBtn1=document.getElementById('btn1');
+			const oBtn2=document.getElementById('btn2');
+			//下部分盒子
+			const oBottom=document.getElementById('bottom');
+			//下面的小Ul
+			const oUl=document.getElementById('ul');
+			//小ul的li
+			const oSmapic=oUl.getElementsByTagName('li');
+			//小图片
+//			const oSmapic=oUl.getElementsByTagName('img')
+			//时间
+			  
+			var timer = null;
+			//下标
+			let xiabiao=0;
+			//index
+			let zIndex=1;
+			slider();
+			//大图移入事件
+			oLeft.onmouseenter=oBtn1.onmouseenter=function(){
+				sport_11(oBtn1,{opacity:100})
+			}
+			oLeft.onmouseleave=oBtn1.onmouseleave=function(){
+				sport_11(oBtn1,{opacity:0})
+			}
+			oRight.onmouseenter=oBtn2.onmouseenter=function(){
+				sport_11(oBtn2,{opacity:100})
+			}
+			oRight.onmouseleave=oBtn2.onmouseleave=function(){
+				sport_11(oBtn2,{opacity:0})
+			}
+			//按钮点击事件
+			oBtn1.onclick=function(){
+				xiabiao--;
+				if(xiabiao == -1){
+					xiabiao = oBigpic.length-1;
+				}
+				
+				slider()
+			}
+			oBtn2.onclick=function(){
+				xiabiao++;
+				if(xiabiao == oBigpic.length ){
+					xiabiao = 0;
+				}
+				
+				slider()
+			}
+			//小图事件
+			for(let i=0;i<oSmapic.length;i++){
+				
+				//划入事件
+				oSmapic[i].onmouseenter=function(){
+					if(i != 0){
+						sport_11(oSmapic[0],{opacity:50})
+					}
+					sport_11(oSmapic[i],{opacity:100})
+				}
+				//划出
+				oSmapic[i].onmouseleave = function(){
+						if(i != xiabiao){
+							sport_11(this,{opacity : 50})						}
+				}
+				//点击事件
+				oSmapic[i].onclick = function(){
+						xiabiao = i;
+//						oBigpic[i].style.zIndex=++zIndex;
+						slider();
+					}
+			}
+			
+				
+				
+				
+			
+			
+			
+			//----------------------------------------------
+			function slider(){
+					oBigpic[xiabiao].style.zIndex = ++ zIndex;
+					//小图轮播
+					if(xiabiao == 0){
+						sport_11(oUl,{left : 0});
+					}else if(xiabiao == oSmapic.length - 1){
+						sport_11(oUl,{left : -8 * oSmapic[0].offsetWidth});
+					}
+//					else if(xiabiao == oSmapic.length - 2){
+//						sport_11(oUl,{left : -7 * oSmapic[0].offsetWidth});
+//					}
+					else{
+						sport_11(oUl,{left : -(xiabiao - 1) * oSmapic[0].offsetWidth});
+					}
+					//初始化小图的透明度
+					//所有小图透明度为50
+					for(let i = 0,len = oSmapic.length;i < len;i ++){
+						sport_11(oSmapic[i],{opacity : 50})
+					}
+					//当前小图透明度为100
+					sport_11(oSmapic[xiabiao],{opacity : 100});
+				}
+		</script>
+	</body>
+</html>

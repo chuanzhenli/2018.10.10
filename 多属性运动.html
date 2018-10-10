@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			div{
+				height:100px;
+				width:100px;
+				background: cyan;
+				font-size: 12px;
+				color:black;
+				border:2px solid purple;
+				
+				
+			}
+		</style>
+	</head>
+	<body>
+		<div>努力学H5</div>
+		<script src="js/sport_11.js"></script>
+		<script>
+			let oDiv=document.querySelector('div')
+			oDiv.onmouseenter=function(){
+				sport_11(this,{height:120,width:800,opacity:20,fontSize:50,borderWidth:50})
+			}
+			oDiv.onmouseleave=function(){
+				sport_11(this,{height:100,width:100,opacity:100,fontSize:16,borderWidth:5})
+			}
+		</script>
+	</body>
+</html>

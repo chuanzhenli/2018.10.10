@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			body{display: flex;	margin: 0;padding: 0;}
+			
+			#box1{width:100px;height:80px;}
+			#zhao{width:100px;height: 80px;position: absolute;z-index:100}
+			#hua{height:20px;width:20px;opacity: 0.3;position: absolute;background: white;
+					display: none;}			
+			
+			#img1{width:100px;height: 80px;}
+			
+			#box2{width:100px;height:80px;
+					/*display: none;*/
+					overflow:hidden;
+					position:relative;
+					margin-left: 20px;}
+			#img2{position: absolute;width:500px;height:320px;}
+		</style>
+	</head>
+	<body>
+		
+			
+			
+			
+			<div id="box1">
+				<div id="zhao"></div>
+				<div id="hua"></div>
+				<img src="img/2.jpg" id="img1">
+			</div>
+		
+		<div id="box2">
+			<img src="img/2.jpg" id="img2">
+		</div>
+		<script src="js/sport_11.js"></script>
+		<script>
+			//获取小图盒子
+			const oBox1=document.getElementById('box1');
+			//小图
+			const oImg1=document.getElementById('img1');
+			//遮罩
+			const oZhao=document.getElementById('zhao');
+			//滑块
+			const oHua=document.getElementById('hua');
+			//大图的盒子
+			const oBox2=document.getElementById('box2');
+			//大图图片
+			const oImg2=document.getElementById('img2');
+			
+			oZhao.onmouseenter=function(){
+				oHua.style.display='block';
+				oBox2.style.display='block';
+		
+			}
+			oZhao.onmouseleave=function(){
+				oHua.style.display='none';
+				oBox2.style.display='none';
+		
+			}
+			oZhao.onmousemove=function(evt){
+				let e=evt||window.event;
+				var left=e.offsetX-oHua.offsetWidth/2;
+				var top=e.offsetY-oHua.offsetWidth/2;
+				
+				
+				if(left<=0){
+					left=0;
+				}else if(left>=(oImg1.offsetWidth-oHua.offsetWidth)){
+					left=(oImg1.offsetWidth-oHua.offsetWidth);
+				}
+				if(top <= 0){
+					top = 0 ;
+				}else if(top>=(oImg1.offsetHeight-oHua.offsetHeight)){
+					top=(oImg1.offsetHeight-oHua.offsetHeight);
+				}
+				oHua.style.left=left+'px';
+				oHua.style.top=top+'px';
+				//比例为4
+				oImg2.style.left= -5*oHua.offsetLeft+'px';
+				oImg2.style.top= -4*oHua.offsetTop+'px';
+				console.log(oImg2.style.left,oImg2.style.top);
+	
+				
+				
+				
+				
+				
+			}
+
+		</script>
+	</body>
+</html>
